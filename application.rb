@@ -1,6 +1,7 @@
 def triad(root)
-  notes = [root]
-  
+  third = root + 4
+  fifth = root + 7
+  return [root, third, fifth]
 end
 
 
