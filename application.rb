@@ -1,8 +1,15 @@
-def triad(root)
+def major_triad(root)
   third = root + 4
   fifth = root + 7
   return [root, third, fifth]
 end
+
+def minor_triad(root)
+  third = root + 3
+  fifth = root + 7
+  return [root, third, fifth]
+end
+
 
 scale = ["C", "C#(D♭)" , "D", "D#(E♭)", "E", "F", "F#(G♭)", "G", "G#(A♭)", "A", "A#(B♭)", "B"]
 
@@ -16,7 +23,11 @@ root += 1 if chord.include?("#")
 root -= 1 if chord.include?("♭")
 
 #関数を呼び出す
-notes = triad(root)
+if chord.include?("m")
+  notes = minor_triad(root)
+else
+  notes = major_triad(root)
+end
 
 #はみ出した音を調整
 notes = notes.map do |x|
