@@ -1,4 +1,5 @@
 def triad(root)
+  notes = [root]
   
 end
 
