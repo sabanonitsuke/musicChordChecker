@@ -17,6 +17,6 @@ root = scale.index(chord) #root音を数字に変える
 
 notes = triad(root)
 
-
+notes = notes.map{|x| scale[x]}
 #文字に戻す
-print notes.map{|x| scale[x]}
+puts "#{chord}の構成音は#{notes}です" 
