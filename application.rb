@@ -33,6 +33,8 @@ if chord.include?("M7")
   notes << root + 11
 elsif chord.include?("7")
   notes << root + 10
+elsif chord.include?("add9")
+  notes.insert(1, root + 2)
 end
 
 #はみ出した音を調整
