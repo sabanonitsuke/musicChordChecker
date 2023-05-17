@@ -1,14 +1,14 @@
-def get_root(chord, scale)
+def calculate_index(chord, scale)
   code = chord.match(/[A-G]/).to_s
-  root = scale.index(code)
-  root += 1 if chord.include?("#")
-  root -= 1 if chord.include?("♭")
-  return root
+  index = scale.index(code)
+  index += 1 if chord.include?("#")
+  index -= 1 if chord.include?("♭")
+  return index
 end
 
 scale = ["C", "C#(D♭)" , "D", "D#(E♭)", "E", "F", "F#(G♭)", "G", "G#(A♭)", "A", "A#(B♭)", "B"]
 chord = gets.chomp
-root = get_root(chord, scale)
+root = calculate_index(chord, scale)
 
 #メジャー・マイナー判別
 if chord.include?("m")
