@@ -44,4 +44,4 @@ end
 notes = notes.map{|x| scale[x]}
 
 #アウトプット
-puts "#{chord}の構成音は[#{notes.join(",")}]です" 
+puts "#{chord}の構成音は[#{notes.join(", ")}]です" 
