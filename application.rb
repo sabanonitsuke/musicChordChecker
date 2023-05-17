@@ -10,15 +10,17 @@ def minor_triad(root)
   return [root, third, fifth]
 end
 
+def get_root(chord, scale)
+  code = chord.match(/[A-G]/).to_s
+  root = scale.index(code)
+  root += 1 if chord.include?("#")
+  root -= 1 if chord.include?("♭")
+  return root
+end
 
 scale = ["C", "C#(D♭)" , "D", "D#(E♭)", "E", "F", "F#(G♭)", "G", "G#(A♭)", "A", "A#(B♭)", "B"]
 chord = gets.chomp
-
-#rootを求める
-code = chord.match(/[A-G]/).to_s
-root = scale.index(code)
-root += 1 if chord.include?("#")
-root -= 1 if chord.include?("♭")
+root = get_root(chord, scale)
 
 #メジャー・マイナー判別
 if chord.include?("m")
