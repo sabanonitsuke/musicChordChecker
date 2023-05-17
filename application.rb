@@ -6,29 +6,17 @@ def get_root(chord, scale)
   return root
 end
 
-def major(root)
-  third = root + 4
-  fifth = root + 7
-  return [root, third, fifth]
-end
-
-def minor(root)
-  third = root + 3
-  fifth = root + 7
-  return [root, third, fifth]
-end
-
 scale = ["C", "C#(D♭)" , "D", "D#(E♭)", "E", "F", "F#(G♭)", "G", "G#(A♭)", "A", "A#(B♭)", "B"]
 chord = gets.chomp
 root = get_root(chord, scale)
 
 #メジャー・マイナー判別
 if chord.include?("m")
-  notes = minor(root)
+  notes = [root, root + 3, root + 7]
   #短調基準のコード判別
   notes[2] -= 1 if chord.include?("dim")
 else
-  notes = major(root)
+  notes = [root, root + 4, root + 7]
   #長調基準のコードの判別
   notes[1] += 1 if chord.include?("sus4")
   notes[2] += 1 if chord.include?("aug")
