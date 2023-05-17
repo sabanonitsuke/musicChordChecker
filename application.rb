@@ -12,7 +12,7 @@ end
 
 
 scale = ["C", "C#(D♭)" , "D", "D#(E♭)", "E", "F", "F#(G♭)", "G", "G#(A♭)", "A", "A#(B♭)", "B"]
-puts "構成音を知りたいコードを入力してください"
+puts "コードを入力してください"
 chord = gets.chomp
 
 #rootを求める
