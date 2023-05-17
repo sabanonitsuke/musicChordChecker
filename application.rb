@@ -21,12 +21,14 @@ root = scale.index(code)
 root += 1 if chord.include?("#")
 root -= 1 if chord.include?("♭")
 
-#メジャーとマイナーの判別
+#メジャー・マイナー判別
 if chord.include?("m")
   notes = minor_triad(root)
+  #短調基準のコード判別
+  notes[2] -= 1 if chord.include?("dim")
 else
   notes = major_triad(root)
-  #マイナーコードではあり得ないコードの判別
+  #長調基準のコードの判別
   if chord.include?("sus4")
     notes[1] += 1
   elsif chord.include?("aug")
@@ -36,7 +38,7 @@ else
   end
 end
 
-#7thコードとadd9の判別
+#長調・短調どちらもあり得るコードの判別
 if chord.include?("M7")
   notes << root + 11
 elsif chord.include?("7")
