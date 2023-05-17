@@ -12,7 +12,6 @@ end
 
 
 scale = ["C", "C#(D♭)" , "D", "D#(E♭)", "E", "F", "F#(G♭)", "G", "G#(A♭)", "A", "A#(B♭)", "B"]
-puts "コードを入力してください"
 chord = gets.chomp
 
 #rootを求める
@@ -43,6 +42,8 @@ if chord.include?("M7")
   notes << root + 11
 elsif chord.include?("7")
   notes << root + 10
+  #m7-5コード判別
+  notes[2] -= 1 if chord.include?("m7-5")
 elsif chord.include?("add9")
   notes.insert(1, root + 2)
 end
@@ -57,4 +58,4 @@ end
 notes = notes.map{|x| scale[x]}
 
 #アウトプット
-puts "#{chord}の構成音は[#{notes.join(", ")}]です" 
+puts "#{chord}の構成音は[#{notes.join(", ")}]" 
