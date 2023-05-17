@@ -40,6 +40,8 @@ end
 #augコードの判別
 if chord.include?("aug")
   notes[2] += 1
+elsif chord.include?("6")
+  notes[2] += 2
 end
 
 #はみ出した音を調整
