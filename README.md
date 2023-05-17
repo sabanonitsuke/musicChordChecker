@@ -28,7 +28,8 @@
 </table>
 
 # 基本アルゴリズム
-![アリゴリズムメモ](https://gyazo.com/d8fac6ae6a35f1cdb32002a1157c6316)
+![アリゴリズムメモ](https://i.gyazo.com/d8fac6ae6a35f1cdb32002a1157c6316.png)
+
 
 # 今後の方針
 ピアノのUIを用意し、直感で構成音がわかるようにする
