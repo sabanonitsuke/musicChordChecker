@@ -1,47 +1,58 @@
-def major_triad(root)
-  third = root + 4
-  fifth = root + 7
-  return [root, third, fifth]
+def calculate_index(chord, scale)
+  code = chord.match(/[A-G]/).to_s
+  index = scale.index(code)
+  index += 1 if chord.include?("#")
+  index -= 1 if chord.include?("♭")
+  return index
 end
-
-def minor_triad(root)
-  third = root + 3
-  fifth = root + 7
-  return [root, third, fifth]
-end
-
 
 scale = ["C", "C#(D♭)" , "D", "D#(E♭)", "E", "F", "F#(G♭)", "G", "G#(A♭)", "A", "A#(B♭)", "B"]
-puts "構成音を知りたいコードを入力してください"
 chord = gets.chomp
 
-#rootを求める
-code = chord.match(/[A-G]/).to_s
-root = scale.index(code)
-root += 1 if chord.include?("#")
-root -= 1 if chord.include?("♭")
-
-#メジャーとマイナーの判別
-if chord.include?("m")
-  notes = minor_triad(root)
+if chord.include?("/")
+  root_symbol, base_symbol = chord.split("/")
+  base = calculate_index(base_symbol, scale)
+  fraction = true
 else
-  notes = major_triad(root)
+  root_symbol = chord
+  fraction = false
 end
 
-#7thコードの判別
-if chord.include?("M7")
+root = calculate_index(root_symbol, scale)
+
+#メジャー・マイナー判別
+if root_symbol.include?("m")
+  notes = [root, root + 3, root + 7]
+  #短調基準のコード判別
+  notes[2] -= 1 if root_symbol.include?("dim")
+else
+  notes = [root, root + 4, root + 7]
+  #長調基準のコードの判別
+  notes[1] += 1 if root_symbol.include?("sus4")
+  notes[2] += 1 if root_symbol.include?("aug")
+  notes[2] += 2 if root_symbol.include?("6")
+end
+
+#長調・短調どちらもあり得るコードの判別
+if root_symbol.include?("M7")
   notes << root + 11
-elsif chord.include?("7")
+elsif root_symbol.include?("7")
   notes << root + 10
+  #m7-5コード判別
+  notes[2] -= 1 if root_symbol.include?("m7-5")
+elsif root_symbol.include?("add9")
+  notes.insert(1, root + 2)
 end
 
-#はみ出した音を調整
 notes = notes.map do |x|
   x >= 12 ? x - 12 : x
 end
 
-#音階を文字に変換
-notes = notes.map{|x| scale[x]}
+if fraction
+  until notes[0] == base
+    notes = notes.rotate
+  end
+end
 
-#アウトプット
-puts "#{chord}の構成音は[#{notes.join(", ")}]です" 
+notes = notes.map{|x| scale[x]}
+puts "#{chord}の構成音は[#{notes.join(", ")}]" 
