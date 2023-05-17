@@ -26,6 +26,14 @@ if chord.include?("m")
   notes = minor_triad(root)
 else
   notes = major_triad(root)
+  #マイナーコードではあり得ないコードの判別
+  if chord.include?("sus4")
+    notes[1] += 1
+  elsif chord.include?("aug")
+    notes[2] += 1
+  elsif chord.include?("6")
+    notes[2] += 2
+  end
 end
 
 #7thコードとadd9の判別
@@ -37,12 +45,6 @@ elsif chord.include?("add9")
   notes.insert(1, root + 2)
 end
 
-#augコードの判別
-if chord.include?("aug")
-  notes[2] += 1
-elsif chord.include?("6")
-  notes[2] += 2
-end
 
 #はみ出した音を調整
 notes = notes.map do |x|
