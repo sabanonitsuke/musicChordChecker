@@ -28,13 +28,18 @@ else
   notes = major_triad(root)
 end
 
-#7thコードの判別
+#7thコードとadd9の判別
 if chord.include?("M7")
   notes << root + 11
 elsif chord.include?("7")
   notes << root + 10
 elsif chord.include?("add9")
   notes.insert(1, root + 2)
+end
+
+#augコードの判別
+if chord.include?("aug")
+  notes[2] += 1
 end
 
 #はみ出した音を調整
